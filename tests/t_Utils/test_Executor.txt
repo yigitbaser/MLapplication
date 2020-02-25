@@ -1,0 +1,15 @@
+>>> from src.Utils.Executor import Executor
+>>> from tests.t_Utils.test_Executor import MySum, MyNeg, MyMul
+>>> executor = Executor()
+>>> EMPTY_QUEUE = []
+>>> out = executor.execute([1.0], EMPTY_QUEUE)
+>>> print(out)
+[1.0]
+>>> MIX_QUEUE= [
+...     (MySum(), {"y": 10.0}),
+...     (MyNeg(), {}),
+...     (MyMul(), {"y": 5.0, "z": 7.0})
+... ]
+>>> out = executor.execute([0.0], MIX_QUEUE)
+>>> print(out)
+[-350.0]

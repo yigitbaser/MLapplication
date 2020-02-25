@@ -1,0 +1,32 @@
+>>> from src.GlobalConstants import ATTR_TIME, ATTR_VALUE
+>>> import src.Data.TimeSeriesGenerator as G
+>>> import src.Transformation.ListTSToSeriesTransformator as T
+>>> tsg = G.TimeSeriesGenerator()
+>>> t = T.ListTSToSeriesTransformator()
+>>> ts_list = tsg.generate_day_data(True)
+>>> t.fit_predict(ts_list, [ATTR_TIME, ATTR_VALUE])
+2019-08-01    56
+2019-08-05    44
+2019-08-09    12
+2019-08-11    44
+2019-08-13    69
+2019-08-22    19
+2019-08-24    11
+2019-08-25    40
+2019-08-26     3
+2019-08-27    81
+2019-08-28    97
+2019-08-29     6
+2019-09-01    25
+2019-09-03     1
+2019-09-09    61
+2019-09-11     7
+2019-09-12    66
+2019-09-13    74
+2019-09-17    86
+2019-09-22    34
+2019-09-23    32
+2019-09-24    58
+2019-09-29    10
+2019-09-30    56
+Name: VALUE, dtype: int64

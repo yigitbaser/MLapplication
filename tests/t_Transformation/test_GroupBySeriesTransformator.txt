@@ -1,0 +1,17 @@
+>>> from src.GlobalConstants import PER_DAY
+>>> import src.Transformation.GroupBySeriesTransformator as G
+>>> from pandas import Series
+>>> from datetime import datetime
+>>> from pprint import pprint
+>>> TS_INPUT_TRIPLET = Series(
+...     data=[1, 2, 3],
+...     index=[datetime(2019, 12, 25), datetime(2020, 1, 1), datetime(2020, 1, 2)],
+...     name="VALUE"
+... )
+>>> gps = G.GroupBySeriesTransformator()
+>>> ts_out = gps.fit_predict(TS_INPUT_TRIPLET, PER_DAY, "sum")
+>>> pprint(ts_out)
+2019-12-25    1
+2020-01-01    2
+2020-01-02    3
+Name: VALUE, dtype: int64

@@ -1,0 +1,39 @@
+>>> from src.GlobalConstants import PER_WEEK
+>>> import src.Transformation.SeriesToDenseSeriesTransformator as S
+>>> from datetime import datetime
+>>> from pandas import Series
+>>> from pprint import pprint
+>>> TS_INPUT_W = Series(
+...     data=[1, 2, 3],
+...     index=[datetime(2019, 12, 8), datetime(2019, 12, 29), datetime(2020, 1, 12)]
+... )
+>>> START_OUT = datetime(2019, 12, 1)
+>>> END_IN = datetime(2019, 12, 29)
+>>> sds = S.SeriesToDenseSeriesTransformator()
+>>> pprint(TS_INPUT_W)
+2019-12-08    1
+2019-12-29    2
+2020-01-12    3
+dtype: int64
+>>> ts = sds.fit_predict(TS_INPUT_W, PER_WEEK)
+>>> pprint(ts)
+2019-12-08    1
+2019-12-15    0
+2019-12-22    0
+2019-12-29    2
+2020-01-05    0
+2020-01-12    3
+Freq: W-SUN, dtype: int64
+>>> pprint(TS_INPUT_W)
+2019-12-08    1
+2019-12-29    2
+2020-01-12    3
+dtype: int64
+>>> ts_interval = sds.fit_predict(TS_INPUT_W, PER_WEEK, START_OUT, END_IN)
+>>> pprint(ts_interval)
+2019-12-01    0
+2019-12-08    1
+2019-12-15    0
+2019-12-22    0
+2019-12-29    2
+Freq: W-SUN, dtype: int64

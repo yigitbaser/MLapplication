@@ -1,0 +1,21 @@
+>>> from src.GlobalConstants import PER_DAY, PER_WEEK, PER_MONTH, PER_YEAR
+>>> import src.Transformation.DatetimeToPeriodTransformator as D
+>>> dtp = D.DatetimeToPeriodTransformator()
+>>> from datetime import datetime
+>>> INPUT_DATE = datetime(2020, 2, 26)
+>>> OUTPUT_DAY = datetime(2020, 2, 26)
+>>> OUTPUT_WEEK = datetime(2020, 3, 1)
+>>> OUTPUT_MONTH = datetime(2020, 2, 29)
+>>> OUTPUT_YEAR = datetime(2020, 12, 31)
+>>> period_date = dtp.fit_predict(INPUT_DATE, PER_DAY)
+>>> print(period_date)
+2020-02-26 00:00:00
+>>> period_date = dtp.fit_predict(INPUT_DATE, PER_WEEK)
+>>> print(period_date)
+2020-03-01 00:00:00
+>>> period_date = dtp.fit_predict(INPUT_DATE, PER_MONTH)
+>>> print(period_date)
+2020-02-29 00:00:00
+>>> period_date = dtp.fit_predict(INPUT_DATE, PER_YEAR)
+>>> print(period_date)
+2020-12-31 00:00:00

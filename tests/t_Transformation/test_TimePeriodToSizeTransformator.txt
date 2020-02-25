@@ -1,0 +1,20 @@
+>>> import src.Transformation.TimePeriodToSizeTransformator as T
+>>> tps = T.TimePeriodToSizeTransformator()
+>>> from datetime import datetime
+>>> from src.GlobalConstants import PER_DAY, PER_WEEK, PER_MONTH, PER_YEAR
+>>> INPUT_DAY = [datetime(2020, 1, 1), datetime(2020, 1, 31)]
+>>> period_size = tps.fit_predict(INPUT_DAY[0], INPUT_DAY[1], PER_DAY)
+>>> print(period_size)
+31
+>>> INPUT_WEEK = [datetime(2020, 1, 5), datetime(2020, 2, 9)]
+>>> period_size = tps.fit_predict(INPUT_WEEK[0], INPUT_WEEK[1], PER_WEEK)
+>>> print(period_size)
+6
+>>> INPUT_MONTH = [datetime(2019, 1, 31), datetime(2020, 2, 29)]
+>>> period_size = tps.fit_predict(INPUT_MONTH[0], INPUT_MONTH[1], PER_MONTH)
+>>> print(period_size)
+14
+>>> INPUT_YEAR = [datetime(2015, 1, 31), datetime(2020, 1, 31)]
+>>> period_size = tps.fit_predict(INPUT_YEAR[0], INPUT_YEAR[1], PER_YEAR)
+>>> print(period_size)
+6

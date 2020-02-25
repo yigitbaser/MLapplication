@@ -1,0 +1,14 @@
+>>> import src.Transformation.ValueArrayToEntropyTransformator as E
+>>> ARRAY_VALUES = [1, 2, 3]
+>>> vae = E.ValueArrayToEntropyTransformator()
+>>> norm_entropy = vae.fit_predict(ARRAY_VALUES)
+>>> print(norm_entropy)
+0.920619835714305
+>>> DENSE_ARRAY_SIZE = 50
+>>> norm_entropy = vae.fit_predict(ARRAY_VALUES, DENSE_ARRAY_SIZE)
+>>> print(norm_entropy)
+0.2585374020817293
+>>> ARRAY_VALUES = [1, 0, 3]
+>>> norm_entropy = vae.fit_predict(ARRAY_VALUES, DENSE_ARRAY_SIZE)
+>>> print(norm_entropy)
+nan

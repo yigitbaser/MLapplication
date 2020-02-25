@@ -1,0 +1,54 @@
+>>> from src.GlobalConstants import FP, PER_DAY, PER_MONTH, PER_YEAR
+>>> import src.Transformation.FrequencyResampleSeriesTransformator as S
+>>> from datetime import datetime
+>>> from pandas import Series
+>>> from pprint import pprint
+>>> TS_TRIPLET_UNSORTED = Series(
+...     data=[1, 1, 1],
+...     index=[datetime(2020, 1, 13), datetime(2020, 1, 1), datetime(2019, 12, 29)],
+...     name="VALUE"
+... )
+>>> sds = S.FrequencyResampleSeriesTransformator()
+>>> ts_out = sds.fit_predict(TS_TRIPLET_UNSORTED, PER_DAY, "count")
+>>> pprint(ts_out)
+2019-12-29    1
+2019-12-30    0
+2019-12-31    0
+2020-01-01    1
+2020-01-02    0
+2020-01-03    0
+2020-01-04    0
+2020-01-05    0
+2020-01-06    0
+2020-01-07    0
+2020-01-08    0
+2020-01-09    0
+2020-01-10    0
+2020-01-11    0
+2020-01-12    0
+2020-01-13    1
+Freq: D, Name: VALUE, dtype: int64
+>>> START_DATE_SHORT = datetime(2019, 10, 31)
+>>> END_DATE_SHORT = datetime(2020, 1, 2)
+>>> ts_out_period_short = sds.fit_predict(TS_TRIPLET_UNSORTED, PER_MONTH, "count", START_DATE_SHORT, END_DATE_SHORT)
+>>> pprint(ts_out_period_short)
+2019-10-31    0
+2019-11-30    0
+2019-12-31    1
+2020-01-31    1
+Freq: M, dtype: int64
+>>> START_DATE_LONG = datetime(2015, 12, 31)
+>>> END_DATE_LONG = datetime(2022, 1, 31)
+>>> ts_out_period_long = sds.fit_predict(TS_TRIPLET_UNSORTED, PER_YEAR, "sum", START_DATE_LONG, END_DATE_LONG)
+>>> pprint(ts_out_period_long)
+2015-12-31    0
+2016-12-31    0
+2017-12-31    0
+2018-12-31    0
+2019-12-31    1
+2020-12-31    2
+2021-12-31    0
+2022-12-31    0
+Freq: A-DEC, dtype: int64
+
+

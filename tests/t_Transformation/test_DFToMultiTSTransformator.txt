@@ -1,0 +1,35 @@
+>>> from src.GlobalConstants import ATTR_ID, ATTR_TIME, ATTR_VALUE
+>>> import src.Data.TimeSeriesGenerator as G
+>>> import src.Transformation.DFToMultiTSTransformator as T
+>>> from pprint import pprint
+>>> tsg = G.TimeSeriesGenerator()
+>>> df_triplet = tsg.generate_sample_triplet_df()
+>>> pprint(df_triplet)
+    ID       TIME  VALUE
+0    1 2019-08-09      1
+1    5 2019-09-09      1
+2    2 2019-08-13      1
+3    7 2019-09-28      1
+4    5 2019-08-05      1
+..  ..        ...    ...
+95   3 2019-08-23      1
+96   8 2019-09-10      1
+97   4 2019-09-12      1
+98   1 2019-08-20      1
+99  10 2019-09-22    105
+<BLANKLINE>
+[100 rows x 3 columns]
+>>> tmt = T.DFToMultiTSTransformator()
+>>> df_timeseries = tmt.fit_predict(df_triplet, ATTR_ID, ATTR_TIME, ATTR_VALUE)
+>>> pprint(df_timeseries)
+   ID                                           TS_VALUE
+0   1  [(2019-08-09 00:00:00, 1), (2019-08-01 00:00:0...
+1   2  [(2019-08-13 00:00:00, 1), (2019-09-23 00:00:0...
+2   3  [(2019-09-09 00:00:00, 1), (2019-08-25 00:00:0...
+3   4  [(2019-09-17 00:00:00, 1), (2019-09-22 00:00:0...
+4   5  [(2019-09-09 00:00:00, 1), (2019-08-05 00:00:0...
+5   6  [(2019-08-22 00:00:00, 1), (2019-08-26 00:00:0...
+6   7  [(2019-09-28 00:00:00, 1), (2019-08-29 00:00:0...
+7   8  [(2019-08-13 00:00:00, 1), (2019-09-23 00:00:0...
+8   9  [(2019-08-01 00:00:00, 1), (2019-09-04 00:00:0...
+9  10                       [(2019-09-22 00:00:00, 105)]
